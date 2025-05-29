@@ -1,0 +1,24 @@
+services:
+  latex-server:
+    build: .
+    ports:
+      - "7474:8000"
+    container_name: latex-server
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    environment:
+      - PYTHONUNBUFFERED=1
+    volumes:
+      # Optional: mount a directory for logs
+      - ./logs:/app/logs
+    networks:
+      - latex-network
+
+networks:
+  latex-network:
+    driver: bridge
