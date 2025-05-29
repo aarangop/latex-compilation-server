@@ -6,7 +6,6 @@ import subprocess
 import tempfile
 import os
 import logging
-from pathlib import Path
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -71,7 +70,7 @@ async def compile_latex(request: LaTeXRequest):
             )
 
             if result1.returncode != 0:
-                logger.error(f"First pdflatex pass failed: {result1.stderr}")
+                logger.error(f"First pdflatex pass failed: {result1}")
                 raise HTTPException(
                     status_code=400,
                     detail=f"LaTeX compilation failed: {result1.stderr[:500]}"

@@ -3,16 +3,19 @@
 A Docker-based HTTP server for compiling LaTeX documents to PDF without
 requiring local LaTeX installation.
 
+This project was motivated by my need to compile LaTeX documents without relying
+on a local LaTeX installation for my
+[CV Tailoring MCP server](https://github.com/aarangop/resume-mcp).
+
+This microservice now offers the narrow functionality of compiling LaTeX docs to
+PDF.
+
 ## Quick Start
 
 1. **Clone/Download the files:**
 
    ```bash
-   # Save these files in a directory:
-   # - Dockerfile
-   # - docker-compose.yml
-   # - latex_server.py
-   # - requirements.txt
+   git clone https://github.com/aarangop/latex-compilation-server && cd latex-compilation-server
    ```
 
 2. **Build and start the server:**
@@ -25,6 +28,10 @@ requiring local LaTeX installation.
    docker build -t latex-server .
    docker run -d -p 7474:8000 --name latex-server latex-server
    ```
+
+Since this container has LaTeX dependencies, the first build may take a while as
+it downloads and installs the necessary packages. But since we're using a staged
+build, subsequent builds should be much faster.
 
 3. **Verify it's running:**
    ```bash
