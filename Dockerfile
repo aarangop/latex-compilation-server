@@ -3,9 +3,14 @@ FROM python:3.11-slim AS latex-base
 
 RUN apt-get update && apt-get install -y \
     curl \
-    texlive-full \
-    && rm -rf /var/lib/apt/lists/* \
-    && apt-get clean
+    texlive-latex-base \
+    texlive-latex-recommended \
+    texlive-latex-extra \
+    texlive-fonts-recommended \
+    texlive-fonts-extra \
+    && rm -rf /var/lib/apt/lists/*
+
+# For a full latex installation use RUN apt-get update && apt-get install -y texlive-full
 
 # Install uv (separate layer)
 RUN curl -LsSf https://astral.sh/uv/install.sh | sh
